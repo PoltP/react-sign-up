@@ -1,0 +1,10 @@
+{
+  "signup.title": "Sign up to Coins.ph!",
+  "signup.email": "Email",
+  "signup.username": "Choose username",
+  "signup.password": "Password",
+  "signup.passwordConfirm": "Repeat your password",
+  "signup.submit": "Sign up",
+  "signup.required": "This field is required",
+  "signup.success": "Signed up successfully!"
+}
