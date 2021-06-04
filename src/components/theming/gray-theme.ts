@@ -24,6 +24,9 @@ export const GRAY_THEME: ITheme = {
     padding: {
         inner: '8px'
     },
+    margin: {
+        inner: '8px'
+    },
 
     button: {
         borderRadius: '6px',

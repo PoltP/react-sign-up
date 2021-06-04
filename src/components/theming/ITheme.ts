@@ -22,6 +22,9 @@ export interface ITheme {
     padding: {
         inner: string;
     },
+    margin: {
+        inner: string;
+    },
 
     button: {
         borderRadius: string;
