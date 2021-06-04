@@ -1,3 +1,25 @@
+
+
+# Short platform and architecture description
+
+1) create-react-app - to start easily with application environment, can be ejected and set up manually.
+I already have some issues with customization tsconfig (https://github.com/facebook/create-react-app/issues/8909) :)
+
+2) Typescript - static type definition allows to validate code before it will run, allows to control API contact for developers and provides more readability.
+
+3) Styled Components - the most popular implementation of CSS-in-JS. 
+I love both SASS and Styled, here I've chosen Styled because of the following:
+component based architecture, changes controlled by props, styles can be inherit, do not require to handle class-names manually, styles are rendered only if the component is rendered, easier to write CSS with variables for me etc.
+Some references concerning it:
+https://itnext.io/css-in-js-vs-pre-post-processors-in-2019-8b1e20c066ed
+https://binyamin.medium.com/styled-components-vs-css-sass-css-in-jsx-c3c9268e8945
+
+4) theming - via ThemeProvider for Styled
+
+5) i18n - localization prototype, I do not see any reason to use i18next/react-i18next and similar libraries now according to task description, it can be changed quickly using required internationalization library&
+
+
+# -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
