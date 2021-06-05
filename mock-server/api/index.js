@@ -20,8 +20,12 @@ const ERRORS = {
     }
 };
 
+const convertUsername = username => {
+    return username?.trim().toLowerCase();
+}
+
 const checkIsAlreadyTakenError = (username) => {
-    if (username && namesCollection[username.trim()]) {
+    if (username && namesCollection[convertUsername(username)]) {
         return {
             username: ERRORS.alreadyTaken
         };
@@ -33,7 +37,7 @@ const checkErrors = (body) => {
         let error = undefined;
         if (!body[key] || body[key].trim() === '') {
             error = ERRORS.blank;
-        } else if (key === 'name' && checkIsAlreadyTaken(body[key])) {
+        } else if (key === 'name' && checkIsAlreadyTaken(body['name'])) {
             error = ERRORS.alreadyTaken
         }
         if(error) {
@@ -60,7 +64,7 @@ apiRouter.post('/signup', (req, res) => {
     const errors = checkErrors(req.body);
     if (!errors) {
         // In real case password must be hashed
-        namesCollection[req.body.username] = req.body;
+        namesCollection[convertUsername(req.body.username)] = req.body;
         res.json(OK_RESPONSE).status(200);
     } else {
         res.json({
