@@ -18,6 +18,17 @@ export const Input = styled.input<{ theme?: ITheme; isError?: boolean }>`
     font-weight: ${theme.fontWeight.regular};
     font-size: ${theme.fontSize.label};
     line-height: 120%;
+
+    &::placeholder {
+      ${isError ? `color: ${theme.color.error}`: ''};
+    }
+
+    &:-webkit-autofill::first-line {
+      font-size: ${theme.fontSize.label};
+    }
+    &:-webkit-autofill {
+      -webkit-text-fill-color: ${isError ? theme.color.error : theme.color.subText} !important;
+    }
   `}
 `
 
