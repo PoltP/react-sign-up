@@ -19,11 +19,8 @@ export const Container = styled.div<{ theme?: ITheme}>`
   @media ${mediaQueries.laptop1280} {
     padding: 40px;
   }
-  @media ${mediaQueries.tablet768} {
-    padding: 20px;
-  }
   @media ${mediaQueries.mobile414} {
-    padding: 10px;
+    padding: 40px 20px;
   }
 
   ${({ theme }) => `
