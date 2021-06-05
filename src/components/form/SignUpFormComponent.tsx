@@ -1,16 +1,14 @@
 
 import React, { useEffect, useState } from 'react';
 
-import { Block } from './block.styled';
 import { Container } from './container.styled';
 import { Button } from './button.styled';
-import { Input } from './input.styled';
-import { Label } from './label.styled';
 import { SignUpForm } from './signup-form.styled';
-import { ErrorText } from './error.styled';
+import { ErrorText } from '../elements/error.styled';
+import { InputComponent } from '../input/InputComponent';
 import { i18nCreator } from '../localization/i18n';
-import { User, Errors, KnownFields } from '../types/form-fields';
 import { signUpValidator } from '../validation/sign-up-validator';
+import { User, Errors, KnownFields } from '../types/form-fields';
 
 const i18nSignUp = i18nCreator('signup');
 
@@ -157,30 +155,18 @@ export const SignUpFormComponent = () => {
           {i18nSignUp('success')}
         </> : 
         <>
-          <Block>
-            <Label>{i18nSignUp('email')}
-              <Input required type="email" name="email" placeholder={i18nSignUp('email')} value={/*user.*/email} onChange={handleChange} />
-              <ErrorText visible={!!errors['email']}>{errors['email']?.message}</ErrorText>
-            </Label>
-          </Block>
-          <Block>
-            <Label>{i18nSignUp('username')}
-              <Input required type="text" name="username" placeholder={i18nSignUp('username')} value={/*user.*/username} onChange={handleChange} />
-              <ErrorText visible={!!errors['username']}>{errors['username']?.message}</ErrorText>
-            </Label>
-          </Block>
-          <Block>
-            <Label>{i18nSignUp('password')}
-              <Input required type="password" name="password" placeholder={i18nSignUp('password')} value={/*user.*/password} onChange={handleChange} />
-              <ErrorText visible={!!errors['password']}>{errors['password']?.message}</ErrorText>
-            </Label>
-          </Block>
-          <Block>
-            <Label>{i18nSignUp('passwordConfirm')}
-              <Input required type="password" name="passwordConfirm" placeholder={i18nSignUp('passwordConfirm')} value={/*user.*/passwordConfirm} onChange={handleChange} />
-              <ErrorText visible={!!errors['passwordConfirm']}>{errors['passwordConfirm']?.message}</ErrorText>
-            </Label>
-          </Block>
+          <InputComponent label={i18nSignUp('email')} type="email" name="email"
+            value={/*user.*/email} error={errors['email']} onChange={handleChange}
+          />
+          <InputComponent label={i18nSignUp('username')} type="text" name="username"
+            value={/*user.*/username} error={errors['username']} onChange={handleChange} 
+          />
+          <InputComponent label={i18nSignUp('password')} type="password" name="password"
+            value={/*user.*/password} error={errors['password']} onChange={handleChange}
+          />
+          <InputComponent label={i18nSignUp('passwordConfirm')} type="password" name="passwordConfirm"
+            value={/*user.*/passwordConfirm} error={errors['passwordConfirm']} onChange={handleChange}
+          />
           <Button disabled={isSigningUp} onClick={isSigningUp ? undefined : handleSubmit}>
             {i18nSignUp(isSigningUp ? 'signingup' : 'submit')}
             <ErrorText visible={!!otherErrors.length}>{otherErrors.join('\n')}</ErrorText>

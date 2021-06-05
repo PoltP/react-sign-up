@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { DEFAULT_THEME } from '../theming/default-theme';
 import { ITheme } from '../theming/ITheme';
-import { ErrorText } from './error.styled';
+import { ErrorText } from '../elements/error.styled';
 
 export const Button = styled.div<{ theme?: ITheme; disabled?: boolean}>`
   width: 100%;
