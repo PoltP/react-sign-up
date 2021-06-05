@@ -1,12 +1,13 @@
-export type Field = 'unknown' | 'username' | 'email' | 'password' | 'passwordConfirm';
+export type ErrorField = 'unknown' | 'server5xx' | KnownField | string;
+
+export type KnownField = 'username' | 'email' | 'password' | 'passwordConfirm';
+export const KnownFields = ['username', 'email', 'password', 'passwordConfirm'];
 
 export interface IError {
     code?: string,
     message: string
 }
 
-export type SignUpFormFields<T> = {[key in Field]?: T};
+export type Errors = {[key in ErrorField]?: IError};
 
-export type Errors = SignUpFormFields<IError>;
-
-export type User = Omit<SignUpFormFields<string>, 'unknown'>;
+export type User = {[key in KnownField]?: string};

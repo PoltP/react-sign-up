@@ -9,7 +9,7 @@ import { Label } from './label.styled';
 import { SignUpForm } from './signup-form.styled';
 import { ErrorText } from './error.styled';
 import { i18nCreator } from '../localization/i18n';
-import { User, Errors } from '../types/form-fields';
+import { User, Errors, KnownFields } from '../types/form-fields';
 import { signUpValidator } from '../validation/sign-up-validator';
 
 const i18nSignUp = i18nCreator('signup');
@@ -20,8 +20,14 @@ const POST_HEADER = {
   'Content-type': 'application/json; charset=UTF-8'
 };
 
+const isServerError = (status: number) => status >= 500 && status <= 526;
+
+const getOtherErrors = (errors: Errors) =>
+  Object.keys(errors).filter(key => !KnownFields.includes(key)).map(key => errors[key]?.message);
+
 export const SignUpFormComponent = () => {
   const [isSent, setIsSent] = useState(false);
+  const [isSigningUp, setIsSigningUp] = useState(false);
 
   //const [user, setUser] = useState<User>({username: '', email: '', password: '', passwordConfirm: ''});
   const [username, setUsername] = useState('')
@@ -69,6 +75,7 @@ export const SignUpFormComponent = () => {
       });
     }
 
+    setIsSigningUp(true);
     console.log(`SignUp Submit: \nname=${user.username}\ne-mail=${user.email}\npassword=${user.password}`);
     const sendData = async () => {
       const result = await fetch(`${SERVER_URL}/api/signup`, {
@@ -76,15 +83,18 @@ export const SignUpFormComponent = () => {
         body: JSON.stringify({username: user.username, email: user.email, password: user.password}),
         headers: POST_HEADER
       });
+      if (isServerError(result.status)) {
+        setErrors({
+          'server5xx': {message: `${i18nSignUp('error')}${result.statusText}`}
+        });
+        return setIsSigningUp(false);
+      }
       result
         .json()
         .then(data => {
           console.log(`SignUp Response: ${JSON.stringify(data)}`);
           if (data.errors) {
-            setErrors({
-              ...errors,
-              ...data.errors
-            });
+            setErrors(data.errors);
           } else {
             clear();
             setIsSent(true);
@@ -92,11 +102,11 @@ export const SignUpFormComponent = () => {
         })
         .catch(e => {
           setErrors({
-            ...errors,
             'unknown': {message: e.message}
           })
           console.error(e.message);
-        });
+        })
+        .finally(() => setIsSigningUp(false));
     };
 
     sendData();
@@ -137,6 +147,8 @@ export const SignUpFormComponent = () => {
     /*user.*/username && checkUsername();
   }, [/*user.*/username])
 
+
+  const otherErrors = getOtherErrors(errors);
   return <Container>
     {i18nSignUp('title')}
     <SignUpForm>
@@ -169,7 +181,10 @@ export const SignUpFormComponent = () => {
               <ErrorText visible={!!errors['passwordConfirm']}>{errors['passwordConfirm']?.message}</ErrorText>
             </Label>
           </Block>
-          <Button onClick={handleSubmit}>{i18nSignUp('submit')}</Button>
+          <Button disabled={isSigningUp} onClick={isSigningUp ? undefined : handleSubmit}>
+            {i18nSignUp(isSigningUp ? 'signingup' : 'submit')}
+            <ErrorText visible={!!otherErrors.length}>{otherErrors.join('\n')}</ErrorText>
+          </Button>
       </>}
     </SignUpForm>
   </Container>;

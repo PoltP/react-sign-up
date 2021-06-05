@@ -6,7 +6,9 @@
   "signup.passwordConfirm": "Repeat your password",
   "signup.submit": "Sign up",
   "signup.required": "This field is required",
+  "signup.signingup": "Signing up...",
   "signup.success": "Signed up successfully!",
+  "signup.error": "Server Error: ",
 
   "signup.errors.username": "Provide a user name",
   "signup.errors.email": "Provide a correct email address",

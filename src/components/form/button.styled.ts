@@ -2,14 +2,16 @@ import styled from 'styled-components';
 
 import { DEFAULT_THEME } from '../theming/default-theme';
 import { ITheme } from '../theming/ITheme';
+import { ErrorText } from './error.styled';
 
-export const Button = styled.div<{ theme?: ITheme}>`
+export const Button = styled.div<{ theme?: ITheme; disabled?: boolean}>`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  position: relative;
+  user-select: none;
 
   ${({ theme }) => `
     border: 2px solid ${theme.color.border};
@@ -23,9 +25,18 @@ export const Button = styled.div<{ theme?: ITheme}>`
     line-height: 120%;
   `}
 
-  &:hover {
+  ${({ disabled }) => disabled ? `
+    cursor: default;
+    opacity: 0.5;
+  ` : `
     cursor: pointer;
-    opacity: 0.75;
+    &:hover {
+      opacity: 0.75;
+    }
+  `}
+
+  ${ErrorText} {
+    top: calc(100% + ${({ theme }) => theme.margin.inner});
   }
 `
 
