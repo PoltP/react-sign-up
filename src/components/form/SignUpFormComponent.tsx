@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-
+import {config} from '../../config';
 import { Container } from './container.styled';
 import { Button } from './button.styled';
 import { SignUpForm } from './signup-form.styled';
@@ -12,7 +12,6 @@ import { User, Errors, KnownFields } from '../types/form-fields';
 
 const i18nSignUp = i18nCreator('signup');
 
-const SERVER_URL = 'http://127.0.0.1:8081';// `${config.serverHost}:${config.serverHost}`;
 const POST_HEADER = {
   'Accept': 'application/json',
   'Content-type': 'application/json; charset=UTF-8'
@@ -74,9 +73,8 @@ export const SignUpFormComponent = () => {
     }
 
     setIsSigningUp(true);
-    console.log(`SignUp Submit: \nname=${user.username}\ne-mail=${user.email}\npassword=${user.password}`);
     const sendData = async () => {
-      const result = await fetch(`${SERVER_URL}/api/signup`, {
+      const result = await fetch(`${config.serverAPI}/signup`, {
         method: 'POST',
         body: JSON.stringify({username: user.username, email: user.email, password: user.password}),
         headers: POST_HEADER
@@ -90,7 +88,6 @@ export const SignUpFormComponent = () => {
       result
         .json()
         .then(data => {
-          console.log(`SignUp Response: ${JSON.stringify(data)}`);
           if (data.errors) {
             setErrors(data.errors);
           } else {
@@ -102,7 +99,6 @@ export const SignUpFormComponent = () => {
           setErrors({
             'unknown': {message: e.message}
           })
-          console.error(e.message);
         })
         .finally(() => setIsSigningUp(false));
     };
@@ -112,7 +108,7 @@ export const SignUpFormComponent = () => {
 
   useEffect(() => {
     const checkUsername = async () => {
-      const result = await fetch(`${SERVER_URL}/api/check`, {
+      const result = await fetch(`${config.serverAPI}/check`, {
         method: 'POST',
         body: JSON.stringify({/*username: user.*/username}),
         headers: POST_HEADER
@@ -120,7 +116,6 @@ export const SignUpFormComponent = () => {
       result
         .json()
         .then(data => {
-          console.log(`Check Response: ${JSON.stringify(data)}`);
           if (data.errors) {
             setErrors(prevErrors => ({
               ...prevErrors,
@@ -138,7 +133,6 @@ export const SignUpFormComponent = () => {
             ...prevErrors,
             'unknown': {message: e.message}
           }))
-          console.error(e.message);
         });
     };
 

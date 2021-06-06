@@ -1,8 +1,8 @@
 import http from 'http';
 import express from 'express';
 import cors from 'cors'
-import {apiRouter} from './api';
-import config from './config';
+import { apiRouter } from './api';
+import { config } from '../src/config';
 
 const app = express();
 

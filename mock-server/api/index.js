@@ -38,11 +38,11 @@ const signUp = (req, res) => {
     if (!errors) {
         // In real case password must be hashed
         namesCollection[convertUsername(req.body.username)] = req.body;
-        res.json(OK_RESPONSE).status(200);
+        res.status(200).json(OK_RESPONSE);
     } else {
-        res.json({
+        res.status(400).json({
             errors: errors
-        }).status(400);
+        });
     }
 }
 
@@ -50,11 +50,11 @@ apiRouter.post('/check', (req, res) => {
     const {username = ''} = req.body;
     const error = checkIsAlreadyTakenError(username);
     if (!error) {
-        res.json(OK_RESPONSE).status(200);
+        res.status(200).json(OK_RESPONSE);
     } else {
-        res.json({
+        res.status(400).json({
             errors: error
-        }).status(400);
+        });
     }
 });
 
@@ -66,11 +66,11 @@ apiRouter.post('/signup-delay/:interval', (req, res) => {
 });
 
 apiRouter.post('/signup-throttle', (req, res) => {
-    res.json({
+    res.status(429).json({
         errors: {
             non_field_errors: ERRORS.non_field_errors
         }
-    }).status(429);
+    });
 });
 
 apiRouter.post('/signup-error', () => {
