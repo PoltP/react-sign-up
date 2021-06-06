@@ -8,7 +8,7 @@ import { ErrorText } from '../elements/error.styled';
 import { InputComponent } from '../input/InputComponent';
 import { i18nCreator } from '../localization/i18n';
 import { signUpValidator } from '../validation/sign-up-validator';
-import { User, Errors, KnownFields } from '../types/form-fields';
+import { Errors, KnownField, KnownFields } from '../types/form-fields';
 
 const i18nSignUp = i18nCreator('signup');
 
@@ -45,7 +45,7 @@ export const SignUpFormComponent = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const field: User = event.target.name as User;
+    const field: KnownField = event.target.name as KnownField;
     const value = event.target.value;
     // setUser({...user, [field]: value});
     switch(field) {

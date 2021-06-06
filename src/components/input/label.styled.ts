@@ -7,6 +7,7 @@ export const Label = styled.label<{ theme?: ITheme; isError?: boolean }>`
   width: 100%;
   padding-bottom: 10px;
   position: relative;
+  user-select: none;
 
   ${({ theme, isError }) => `
     color: ${isError ? theme.color.error : theme.color.text};

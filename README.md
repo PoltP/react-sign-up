@@ -32,6 +32,8 @@ Runs the mock server.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+Form tests cover client validation including cases, when server returns different statuses 200, 400, 429, 500-526.
+
 ### `yarn build`
 
 Builds the app for production to the `build` folder.\
@@ -67,6 +69,8 @@ Some references concerning it:
 https://itnext.io/css-in-js-vs-pre-post-processors-in-2019-8b1e20c066ed
 https://binyamin.medium.com/styled-components-vs-css-sass-css-in-jsx-c3c9268e8945
 
-4) theming - via ThemeProvider for Styled
+4) theming - via ThemeProvider for Styled, I do not use popular libraries like material-ui, carbon, boorstrap etc. to show my point of theming concept
 
 5) i18n - localization prototype, I do not see any reason to use i18next/react-i18next and similar libraries now according to task description, it can be changed quickly using required internationalization library
+
+6) testing - I did't need to install any packages, since create-react-app comes with the [react-testing-library](https://www.npmjs.com/package/@testing-library/react) and its dependencies; to mock server I used my own fetch mock implementation, it can be changed to something like [msw](https://www.npmjs.com/package/msw) if it is required
