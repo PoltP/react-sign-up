@@ -4,6 +4,7 @@ import { Container } from './container.styled';
 import { Button } from './button.styled';
 import { SignUpForm } from './signup-form.styled';
 import { ErrorText } from '../elements/error.styled';
+import { Spinner } from '../elements/spinner.styled';
 import { InputComponent } from '../input/InputComponent';
 import { i18nCreator } from '../localization/i18n';
 import { signUpValidator } from '../validation/sign-up-validator';
@@ -187,6 +188,7 @@ export const SignUpFormComponent = () => {
             />
             <Button disabled={isSigningUp} onClick={isSigningUp ? undefined : handleSubmit}>
               {i18nSignUp(isSigningUp ? 'signingup' : 'submit')}
+              {isSigningUp && <Spinner />}
               <ErrorText visible={!!otherErrors.length}>{otherErrors.join('\n')}</ErrorText>
             </Button>
           </>

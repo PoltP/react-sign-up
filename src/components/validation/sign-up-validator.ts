@@ -7,8 +7,7 @@ const i18nSignUpErrors = i18nCreator('signup.errors');
 // https://github.com/validatorjs/validator.js
 const isEmail = (email: string) => {
   // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
-  // eslint-disable-next-line
-  const regex =
+  const regex = // eslint-disable-next-line
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return regex.test(email);
 };
