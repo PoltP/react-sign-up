@@ -7,16 +7,21 @@ const i18nSignUpErrors = i18nCreator('signup.errors');
 
 // If it is required, change this implementation use one of the known libraries like
 // https://github.com/validatorjs/validator.js
-const isEmail = (email: string) => {
-  // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+// http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+const isEmail = (email: string) =>
   // eslint-disable-next-line
-  return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
-};
+
+const hasInvalidChar = (str: string) =>
+  // eslint-disable-next-line
+  /[$&+,:;=?@#|'<>^*()%!]/.test(
+    str
+  );
 
 const validateUsername: Validator = (user: User): IError | undefined => {
-  if (!user || typeof user.username !== 'string' || user.username.trim().length === 0) {
+  if (!user || typeof user.username !== 'string' || user.username.trim().length === 0 || hasInvalidChar(user.username)) {
     return { code: 'client', message: i18nSignUpErrors('username') };
   }
   return undefined;

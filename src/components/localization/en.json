@@ -10,7 +10,7 @@
   "signup.success": "Signed up successfully!",
   "signup.error": "Server Error: ",
 
-  "signup.errors.username": "Provide a user name",
+  "signup.errors.username": "Provide a valid user name",
   "signup.errors.email": "Provide a correct email address",
   "signup.errors.password": "Password must have at least 8 characters",
   "signup.errors.passwordConfirm": "Password confirmation doesn't match"

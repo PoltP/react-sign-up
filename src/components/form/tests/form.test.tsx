@@ -64,6 +64,14 @@ describe('SignUpForm client errors validation', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  it('should show error if incorrect username was set', async () => {
+    const { asFragment } = render(<SignUpFormComponent />);
+    await fillForm();
+    await waitFor(() => setInputValue('username', 'pavel><poltavets'));
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
+    expect(asFragment()).toMatchSnapshot();
+  });
+
   it('should show error if incorrect email was set', async () => {
     const { asFragment } = render(<SignUpFormComponent />);
     await fillForm();
