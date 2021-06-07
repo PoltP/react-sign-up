@@ -9,4 +9,4 @@ export const App = () => {
       <SignUpFormComponent />
     </ThemeProvider>
   );
-}
+};

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { Block } from './block.styled';
@@ -16,12 +15,27 @@ interface IInputComponentProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const InputComponent = ({ name, label, type, value, error, onChange}: IInputComponentProps) => (
+export const InputComponent = ({
+  name,
+  label,
+  type,
+  value,
+  error,
+  onChange,
+}: IInputComponentProps) => (
   <Block>
-    <Label isError={!!error}>{label}
-      <Input required type={type} name={name} placeholder={label} value={value} isError={!!error} onChange={onChange} />
+    <Label isError={!!error}>
+      {label}
+      <Input
+        required
+        type={type}
+        name={name}
+        placeholder={label}
+        value={value}
+        isError={!!error}
+        onChange={onChange}
+      />
       <ErrorText visible={!!error}>{error?.message}</ErrorText>
     </Label>
   </Block>
 );
-

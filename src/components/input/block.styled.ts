@@ -11,7 +11,7 @@ export const Block = styled.div`
 
   margin-bottom: 30px;
   @media ${mediaQueries.laptop1440} {
-     margin-bottom: 25px;
+    margin-bottom: 25px;
   }
   @media ${mediaQueries.tablet768} {
     margin-bottom: 15px;
@@ -19,4 +19,4 @@ export const Block = styled.div`
   @media ${mediaQueries.mobile414} {
     margin-bottom: 10px;
   }
-`
+`;

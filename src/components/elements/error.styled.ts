@@ -4,7 +4,7 @@ import { mediaQueries } from '../media-queries';
 import { DEFAULT_THEME } from '../theming/default-theme';
 import { ITheme } from '../theming/ITheme';
 
-export const ErrorText = styled.div<{ theme?: ITheme, visible?: boolean}>`
+export const ErrorText = styled.div<{ theme?: ITheme; visible?: boolean }>`
   width: 100%;
   position: absolute;
   left: 0;
@@ -27,8 +27,8 @@ export const ErrorText = styled.div<{ theme?: ITheme, visible?: boolean}>`
       font-size: ${theme.fontSize.text};
     `}
   }
-`
+`;
 
 ErrorText.defaultProps = {
-  theme: DEFAULT_THEME
+  theme: DEFAULT_THEME,
 };

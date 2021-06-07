@@ -4,7 +4,7 @@ import { mediaQueries } from '../media-queries';
 import { DEFAULT_THEME } from '../theming/default-theme';
 import { ITheme } from '../theming/ITheme';
 
-export const Container = styled.div<{ theme?: ITheme}>`
+export const Container = styled.div<{ theme?: ITheme }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,7 @@ export const Container = styled.div<{ theme?: ITheme}>`
   padding: 90px;
   margin: auto;
   max-width: 780px;
-  
+
   @media ${mediaQueries.laptop1440} {
     padding: 60px;
   }
@@ -30,8 +30,8 @@ export const Container = styled.div<{ theme?: ITheme}>`
     font-weight: ${theme.fontWeight.bold};
     font-size: ${theme.fontSize.title};
   `}
-`
+`;
 
 Container.defaultProps = {
-  theme: DEFAULT_THEME
+  theme: DEFAULT_THEME,
 };

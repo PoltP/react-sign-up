@@ -69,7 +69,7 @@ Some references concerning it:
 https://itnext.io/css-in-js-vs-pre-post-processors-in-2019-8b1e20c066ed
 https://binyamin.medium.com/styled-components-vs-css-sass-css-in-jsx-c3c9268e8945
 
-4) theming - via ThemeProvider for Styled, I do not use popular libraries like material-ui, carbon, boorstrap etc. to show my point of theming concept
+4) theming - via ThemeProvider for Styled, I do not use libraries, which implement popular themes like material-ui, carbon, bootstrap etc. to show my point of theming concept
 
 5) i18n - localization prototype, I do not see any reason to use i18next/react-i18next and similar libraries now according to task description, it can be changed quickly using required internationalization library
 

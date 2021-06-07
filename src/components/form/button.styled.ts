@@ -4,7 +4,7 @@ import { DEFAULT_THEME } from '../theming/default-theme';
 import { ITheme } from '../theming/ITheme';
 import { ErrorText } from '../elements/error.styled';
 
-export const Button = styled.div<{ theme?: ITheme; disabled?: boolean}>`
+export const Button = styled.div<{ theme?: ITheme; disabled?: boolean }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -25,10 +25,13 @@ export const Button = styled.div<{ theme?: ITheme; disabled?: boolean}>`
     line-height: 120%;
   `}
 
-  ${({ disabled }) => disabled ? `
+  ${({ disabled }) =>
+    disabled
+      ? `
     cursor: default;
     opacity: 0.5;
-  ` : `
+  `
+      : `
     cursor: pointer;
     &:hover {
       opacity: 0.75;
@@ -38,8 +41,8 @@ export const Button = styled.div<{ theme?: ITheme; disabled?: boolean}>`
   ${ErrorText} {
     top: calc(100% + ${({ theme }) => theme.margin.inner});
   }
-`
+`;
 
 Button.defaultProps = {
-  theme: DEFAULT_THEME
+  theme: DEFAULT_THEME,
 };

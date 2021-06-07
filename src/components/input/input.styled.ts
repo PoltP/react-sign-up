@@ -20,7 +20,7 @@ export const Input = styled.input<{ theme?: ITheme; isError?: boolean }>`
     line-height: 120%;
 
     &::placeholder {
-      ${isError ? `color: ${theme.color.error}`: ''};
+      ${isError ? `color: ${theme.color.error}` : ''};
     }
 
     &:-webkit-autofill::first-line {
@@ -30,8 +30,8 @@ export const Input = styled.input<{ theme?: ITheme; isError?: boolean }>`
       -webkit-text-fill-color: ${isError ? theme.color.error : theme.color.subText} !important;
     }
   `}
-`
+`;
 
 Input.defaultProps = {
-  theme: DEFAULT_THEME
+  theme: DEFAULT_THEME,
 };

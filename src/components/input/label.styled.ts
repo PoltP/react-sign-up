@@ -16,8 +16,8 @@ export const Label = styled.label<{ theme?: ITheme; isError?: boolean }>`
     font-size: ${theme.fontSize.label};
     line-height: 120%;
   `}
-`
+`;
 
 Label.defaultProps = {
-  theme: DEFAULT_THEME
+  theme: DEFAULT_THEME,
 };

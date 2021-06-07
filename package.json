@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "@babel/register": "7.0.0-beta.41",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,7 +31,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mock-server": "node mock-server",
-    "dev": "run-p start mock-server"
+    "dev": "run-p start mock-server",
+    "prettier:check": "prettier --check \"./src/**/*.{d.ts,ts,tsx}\"",
+    "prettier:write": "prettier --write \"./src/**/*.{d.ts,ts,tsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -49,5 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  }  
 }
