@@ -72,6 +72,8 @@ export const SignUpFormComponent = () => {
         ...errors,
         ...validation.errors,
       });
+    } else if(errors.username) {// TODO: ensure separation client/server errors
+      return;
     }
 
     setIsSigningUp(true);

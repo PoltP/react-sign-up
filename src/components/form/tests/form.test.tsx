@@ -101,14 +101,35 @@ describe('SignUpForm server errors validation', () => {
     expect(await screen.findByText(/This name is already taken/)).toBeInTheDocument();
   });
 
-  it('should show error if server returs throttled', async () => {
+  it('should forbid signing up when there is an error after checking user name', async () => {
+    (window.fetch as any).mockImplementationOnce(
+      mockFetch({
+        status: 400,
+        errors: {
+          username: {
+            code: 'already_taken',
+            message: 'This name is already taken',
+          },
+        },
+      })
+    );
+    const { asFragment } = render(<SignUpFormComponent />);
+    await fillForm();
+    await waitFor(() => {
+      fireEvent.click(getStyledComponent(SignUpButton));
+    });
+    expect(window.fetch).toHaveBeenCalledTimes(1);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should show error if server returns throttled', async () => {
     (window.fetch as any).mockImplementation(
       mockFetch(undefined, {
         status: 429,
         errors: {
           non_field_errors: {
             code: 'throttle',
-            message: 'You request was throttled. Plesae try again in 56 sec.',
+            message: 'You request was throttled. Please try again in 56 sec.',
           },
         },
       })
@@ -120,7 +141,7 @@ describe('SignUpForm server errors validation', () => {
     });
 
     expect(
-      await screen.findByText(/You request was throttled. Plesae try again in 56 sec./)
+      await screen.findByText(/You request was throttled. Please try again in 56 sec./)
     ).toBeInTheDocument();
   });
 
