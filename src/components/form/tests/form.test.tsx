@@ -5,6 +5,16 @@ import { Button as SignUpButton } from '../button.styled';
 import { Input } from '../../input/input.styled';
 import { getStyledComponent, mockFetch } from './utils';
 
+const USERNAME_SERVER_ERROR = {
+  status: 400,
+  errors: {
+    username: {
+      code: 'already_taken',
+      message: 'This name is already taken',
+    },
+  },
+};
+
 const setInputValue = (name: string, value: string) => {
   const input = getStyledComponent(Input, name);
   fireEvent.change(input, { target: { value } });
@@ -84,17 +94,7 @@ describe('SignUpForm client errors validation', () => {
 
 describe('SignUpForm server errors validation', () => {
   it('should show error after check user name', async () => {
-    (window.fetch as any).mockImplementationOnce(
-      mockFetch({
-        status: 400,
-        errors: {
-          username: {
-            code: 'already_taken',
-            message: 'This name is already taken',
-          },
-        },
-      })
-    );
+    (window.fetch as any).mockImplementationOnce(mockFetch(USERNAME_SERVER_ERROR));
     render(<SignUpFormComponent />);
     act(() => setInputValue('username', 'Bill Gates'));
 
@@ -102,22 +102,20 @@ describe('SignUpForm server errors validation', () => {
   });
 
   it('should forbid signing up when there is an error after checking user name', async () => {
-    (window.fetch as any).mockImplementationOnce(
-      mockFetch({
-        status: 400,
-        errors: {
-          username: {
-            code: 'already_taken',
-            message: 'This name is already taken',
-          },
-        },
-      })
-    );
+    (window.fetch as any).mockImplementationOnce(mockFetch(USERNAME_SERVER_ERROR));
     const { asFragment } = render(<SignUpFormComponent />);
     await fillForm();
-    await waitFor(() => {
-      fireEvent.click(getStyledComponent(SignUpButton));
-    });
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
+    expect(window.fetch).toHaveBeenCalledTimes(1);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should hide all client validation errors after Sign Up is clicked when fields are set but username has server error', async () => {
+    (window.fetch as any).mockImplementationOnce(mockFetch(USERNAME_SERVER_ERROR));
+    const { asFragment } = render(<SignUpFormComponent />);
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
+    await fillForm();
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
     expect(window.fetch).toHaveBeenCalledTimes(1);
     expect(asFragment()).toMatchSnapshot();
   });
@@ -136,9 +134,7 @@ describe('SignUpForm server errors validation', () => {
     );
     render(<SignUpFormComponent />);
     await fillForm();
-    await waitFor(() => {
-      fireEvent.click(getStyledComponent(SignUpButton));
-    });
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
 
     expect(
       await screen.findByText(/You request was throttled. Please try again in 56 sec./)
@@ -154,9 +150,7 @@ describe('SignUpForm server errors validation', () => {
     );
     render(<SignUpFormComponent />);
     await fillForm();
-    await waitFor(() => {
-      fireEvent.click(getStyledComponent(SignUpButton));
-    });
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
 
     expect(
       await screen.findByText(/Server Error: Internal Server Error Status Text/)

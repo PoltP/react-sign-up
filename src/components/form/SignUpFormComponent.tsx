@@ -8,7 +8,8 @@ import { Spinner } from '../elements/spinner.styled';
 import { InputComponent } from '../input/InputComponent';
 import { i18nCreator } from '../localization/i18n';
 import { signUpValidator } from '../validation/sign-up-validator';
-import { Errors, KnownField, KnownFields } from '../types/form-fields';
+import { getOtherErrors, hasCritical, isServerError } from '../validation/errors';
+import type { Errors, KnownField } from '../types/form-fields';
 
 const i18nSignUp = i18nCreator('signup');
 
@@ -16,13 +17,6 @@ const POST_HEADER = {
   Accept: 'application/json',
   'Content-type': 'application/json; charset=UTF-8',
 };
-
-const isServerError = (status: number) => status >= 500 && status <= 526;
-
-const getOtherErrors = (errors: Errors) =>
-  Object.keys(errors)
-    .filter((key) => !KnownFields.includes(key))
-    .map((key) => errors[key]?.message);
 
 export const SignUpFormComponent = () => {
   const [isSent, setIsSent] = useState(false);
@@ -34,7 +28,8 @@ export const SignUpFormComponent = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  const [errors, setErrors] = useState<Errors>({});
+  const [clientErrors, setClientErrors] = useState<Errors>({});
+  const [serverErrors, setServerErrors] = useState<Errors>({});
 
   const clear = () => {
     // setUser({username: '', email: '', password: '', passwordConfirm: ''});
@@ -43,7 +38,8 @@ export const SignUpFormComponent = () => {
     setPassword('');
     setPasswordConfirm('');
 
-    setErrors({});
+    setClientErrors({});
+    setServerErrors({});
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,13 +62,9 @@ export const SignUpFormComponent = () => {
     e.preventDefault();
 
     const user = { username, email, password, passwordConfirm }; /*user.*/
-    const validation = signUpValidator.validate(user);
-    if (!validation.isValid) {
-      return setErrors({
-        ...errors,
-        ...validation.errors,
-      });
-    } else if(errors.username) {// TODO: ensure separation client/server errors
+    const validationErrors: Errors = signUpValidator.validate(user);
+    setClientErrors(validationErrors);
+    if (hasCritical(validationErrors) || hasCritical(serverErrors)) {
       return;
     }
 
@@ -88,7 +80,7 @@ export const SignUpFormComponent = () => {
         headers: POST_HEADER,
       });
       if (isServerError(result.status)) {
-        setErrors({
+        setServerErrors({
           server5xx: { message: `${i18nSignUp('error')}${result.statusText}` },
         });
         return setIsSigningUp(false);
@@ -97,14 +89,14 @@ export const SignUpFormComponent = () => {
         .json()
         .then((data) => {
           if (data.errors) {
-            setErrors(data.errors);
+            setServerErrors(data.errors);
           } else {
             clear();
             setIsSent(true);
           }
         })
         .catch((e) => {
-          setErrors({
+          setServerErrors({
             unknown: { message: e.message },
           });
         })
@@ -125,19 +117,19 @@ export const SignUpFormComponent = () => {
         .json()
         .then((data) => {
           if (data.errors) {
-            setErrors((prevErrors) => ({
+            setServerErrors((prevErrors) => ({
               ...prevErrors,
               ...data.errors,
             }));
           } else {
-            setErrors((prevErrors) => ({
+            setServerErrors((prevErrors) => ({
               ...prevErrors,
               username: undefined,
             }));
           }
         })
         .catch((e) => {
-          setErrors((prevErrors) => ({
+          setServerErrors((prevErrors) => ({
             ...prevErrors,
             unknown: { message: e.message },
           }));
@@ -147,7 +139,7 @@ export const SignUpFormComponent = () => {
     /*user.*/ username && checkUsername();
   }, [/*user.*/ username]);
 
-  const otherErrors = getOtherErrors(errors);
+  const otherErrors = getOtherErrors(serverErrors);
   return (
     <Container>
       {i18nSignUp('title')}
@@ -161,7 +153,7 @@ export const SignUpFormComponent = () => {
               type="email"
               name="email"
               value={/*user.*/ email}
-              error={errors['email']}
+              error={clientErrors['email'] || serverErrors['email']}
               onChange={handleChange}
             />
             <InputComponent
@@ -169,7 +161,7 @@ export const SignUpFormComponent = () => {
               type="text"
               name="username"
               value={/*user.*/ username}
-              error={errors['username']}
+              error={clientErrors['username'] || serverErrors['username']}
               onChange={handleChange}
             />
             <InputComponent
@@ -177,7 +169,7 @@ export const SignUpFormComponent = () => {
               type="password"
               name="password"
               value={/*user.*/ password}
-              error={errors['password']}
+              error={clientErrors['password'] || serverErrors['password']}
               onChange={handleChange}
             />
             <InputComponent
@@ -185,7 +177,7 @@ export const SignUpFormComponent = () => {
               type="password"
               name="passwordConfirm"
               value={/*user.*/ passwordConfirm}
-              error={errors['passwordConfirm']}
+              error={clientErrors['passwordConfirm']}
               onChange={handleChange}
             />
             <Button disabled={isSigningUp} onClick={isSigningUp ? undefined : handleSubmit}>

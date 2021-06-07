@@ -19,7 +19,9 @@ export const Spinner = styled.div<{ theme?: ITheme; isError?: boolean }>`
   `}
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 

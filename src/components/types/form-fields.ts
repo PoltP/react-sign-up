@@ -1,4 +1,4 @@
-export type ErrorField = 'unknown' | 'server5xx' | KnownField | string;
+export type ErrorField = 'non_field_errors' | 'unknown' | 'server5xx' | KnownField;
 
 export type KnownField = 'username' | 'email' | 'password' | 'passwordConfirm';
 export const KnownFields = ['username', 'email', 'password', 'passwordConfirm'];
