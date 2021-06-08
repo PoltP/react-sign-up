@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { DEFAULT_THEME } from './components/theming/default-theme';
+import { DEFAULT_THEME } from './theming/default-theme';
 import { SignUpFormComponent } from './components/form/SignUpFormComponent';
 
 export const App = () => {

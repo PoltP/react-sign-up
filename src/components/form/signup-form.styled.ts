@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 import { mediaQueries } from '../media-queries';
-import { DEFAULT_THEME } from '../theming/default-theme';
-import { ITheme } from '../theming/ITheme';
+import { DEFAULT_THEME } from '../../theming/default-theme';
+import { ITheme } from '../../theming/ITheme';
 
 export const SignUpForm = styled.form<{ theme?: ITheme }>`
   width: auto; /* min(80vw, auto); */

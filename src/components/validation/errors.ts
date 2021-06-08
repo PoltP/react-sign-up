@@ -1,4 +1,5 @@
-import { Errors, KnownFields, KnownField } from '../types/form-fields';
+import { KnownFields } from '../../types/form-fields';
+import type { Errors, KnownField } from '../../types/form-fields';
 
 const CriticalErrorCodes = ['already_taken', 'blank', 'client'];
 

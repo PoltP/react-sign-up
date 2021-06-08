@@ -97,7 +97,15 @@ Some references concerning it:\
 
 **[/mock-server](https://github.com/PoltP/react-sign-up/tree/master/mock-server)** - primitive server implementation
 
-**[/src/components](https://github.com/PoltP/react-sign-up/tree/master/src/components)** - components including [Sign Up Form](https://github.com/PoltP/react-sign-up/tree/master/src/components/form), [theming](https://github.com/PoltP/react-sign-up/tree/master/src/components/theming), [localization](https://github.com/PoltP/react-sign-up/tree/master/src/components/localization) and tests for them
+**[/src/components](https://github.com/PoltP/react-sign-up/tree/master/src/components)** - components including [Sign Up Form](https://github.com/PoltP/react-sign-up/tree/master/src/components/form) and tests for them
+
+**[/src/localization](https://github.com/PoltP/react-sign-up/tree/master/src/localization)** - localization
+
+**[/src/services](https://github.com/PoltP/react-sign-up/tree/master/src/services)** - HTTP requests
+
+**[/src/theming](https://github.com/PoltP/react-sign-up/tree/master/src/theming)** - theming with 'gray' theme by default
+
+**[/src/types](https://github.com/PoltP/react-sign-up/tree/master/src/types)** - common types
 
 
 ## Future

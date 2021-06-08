@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { DEFAULT_THEME } from '../theming/default-theme';
-import { ITheme } from '../theming/ITheme';
+import { DEFAULT_THEME } from '../../theming/default-theme';
+import { ITheme } from '../../theming/ITheme';
 
 export const Label = styled.label<{ theme?: ITheme; isError?: boolean }>`
   width: 100%;

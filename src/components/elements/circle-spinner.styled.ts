@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { DEFAULT_THEME } from '../theming/default-theme';
-import { ITheme } from '../theming/ITheme';
+import { DEFAULT_THEME } from '../../theming/default-theme';
+import { ITheme } from '../../theming/ITheme';
 
 export const CircleSpinner = styled.div<{ theme?: ITheme; isError?: boolean }>`
   animation: spin 1s ease-in-out infinite;

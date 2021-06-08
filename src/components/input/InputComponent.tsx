@@ -4,11 +4,11 @@ import { Block } from './block.styled';
 import { Input } from './input.styled';
 import { Label } from './label.styled';
 import { ErrorText } from '../elements/error.styled';
-import { IError } from '../types/form-fields';
 import { LineSpinner } from '../elements/line-spinner.styled';
+import type { IError, KnownField } from '../../types/form-fields';
 
 interface IInputComponentProps {
-  name: string;
+  name: KnownField;
   label: string;
   type: string;
   value: string;

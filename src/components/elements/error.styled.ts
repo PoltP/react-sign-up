@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { mediaQueries } from '../media-queries';
 
-import { DEFAULT_THEME } from '../theming/default-theme';
-import { ITheme } from '../theming/ITheme';
+import { DEFAULT_THEME } from '../../theming/default-theme';
+import { ITheme } from '../../theming/ITheme';
 
 export const ErrorText = styled.div<{ theme?: ITheme; visible?: boolean }>`
   width: 100%;

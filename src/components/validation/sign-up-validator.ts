@@ -1,5 +1,5 @@
-import { i18nCreator } from '../localization/i18n';
-import { Errors, IError, User } from '../types/form-fields';
+import { i18nCreator } from '../../localization/i18n';
+import type { Errors, IError, User } from '../../types/form-fields';
 
 export type Validator = (user: User) => IError | undefined;
 
@@ -16,12 +16,15 @@ const isEmail = (email: string) =>
 
 const hasInvalidChar = (str: string) =>
   // eslint-disable-next-line
-  /[$&+,:;=?@#|'<>^*()%!]/.test(
-    str
-  );
+  /[$&+,:;=?@#|'<>^*()%!]/.test(str);
 
 const validateUsername: Validator = (user: User): IError | undefined => {
-  if (!user || typeof user.username !== 'string' || user.username.trim().length === 0 || hasInvalidChar(user.username)) {
+  if (
+    !user ||
+    typeof user.username !== 'string' ||
+    user.username.trim().length === 0 ||
+    hasInvalidChar(user.username)
+  ) {
     return { code: 'client', message: i18nSignUpErrors('username') };
   }
   return undefined;

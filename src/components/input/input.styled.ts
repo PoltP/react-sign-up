@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { DEFAULT_THEME } from '../theming/default-theme';
-import { ITheme } from '../theming/ITheme';
+import { DEFAULT_THEME } from '../../theming/default-theme';
+import { ITheme } from '../../theming/ITheme';
 
 export const Input = styled.input<{ theme?: ITheme; isError?: boolean }>`
   background: transparent;

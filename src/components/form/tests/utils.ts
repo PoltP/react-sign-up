@@ -1,6 +1,5 @@
-import { Errors } from '../../types/form-fields';
-
 import { config } from '../../../config';
+import type { Errors } from '../../../types/form-fields';
 
 export interface IParams {
   status?: number;
