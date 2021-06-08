@@ -36,6 +36,16 @@ export const SignUpFormComponent = () => {
     setServerErrors({});
   };
 
+  const handleValidate = (field: KnownField) => {
+    const validationErrors = signUpValidator.validateField({username, email, password, passwordConfirm}, field);
+    if (validationErrors) {
+      return setClientErrors({
+        ...clientErrors,
+        ...validationErrors
+      });
+    }
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const field: KnownField = event.target.name as KnownField;
     const value = event.target.value;
@@ -138,6 +148,7 @@ export const SignUpFormComponent = () => {
               value={email}
               error={clientErrors['email'] || serverErrors['email']}
               onChange={handleChange}
+              onValidate={handleValidate}
             />
             <InputComponent
               label={i18nSignUp('username')}
@@ -147,6 +158,7 @@ export const SignUpFormComponent = () => {
               error={clientErrors['username'] || serverErrors['username']}
               isLoading={isCheckingUsername}
               onChange={handleChange}
+              onValidate={handleValidate}
             />
             <InputComponent
               label={i18nSignUp('password')}
@@ -155,6 +167,7 @@ export const SignUpFormComponent = () => {
               value={password}
               error={clientErrors['password'] || serverErrors['password']}
               onChange={handleChange}
+              onValidate={handleValidate}
             />
             <InputComponent
               label={i18nSignUp('passwordConfirm')}
@@ -163,6 +176,7 @@ export const SignUpFormComponent = () => {
               value={passwordConfirm}
               error={clientErrors['passwordConfirm']}
               onChange={handleChange}
+              onValidate={handleValidate}
             />
             <Button disabled={isSigningUp} onClick={isSigningUp ? undefined : handleSubmit}>
               {i18nSignUp(isSigningUp ? 'signingup' : 'submit')}

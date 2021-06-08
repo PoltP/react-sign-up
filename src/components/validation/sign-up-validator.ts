@@ -1,5 +1,5 @@
 import { i18nCreator } from '../../localization/i18n';
-import type { Errors, IError, User } from '../../types/form-fields';
+import type { Errors, IError, User, KnownField } from '../../types/form-fields';
 
 export type Validator = (user: User) => IError | undefined;
 
@@ -57,4 +57,16 @@ export const signUpValidator = {
       passwordConfirm: validatePasswordConfirm(user),
     };
   },
+  validateField: (user: User, field: KnownField): Errors => {
+    switch(field) {
+      case 'username':
+        return { username: validateUsername(user) };
+      case 'email':
+        return { email: validateEmail(user) };
+      case 'password':
+        return { password: validatePassword(user) };
+      case 'passwordConfirm':
+        return { passwordConfirm: validatePasswordConfirm(user) };
+    }
+  }
 };

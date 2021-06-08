@@ -105,6 +105,26 @@ describe('SignUpForm client errors validation', () => {
     fireEvent.click(getStyledComponent(SignUpButton));
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('should show error when focus is lost and if an incorrect username was set', async () => {
+    const { asFragment } = render(<SignUpFormComponent />);
+    await fillForm();
+    const input = getStyledComponent(Input, 'username');
+    input.focus();
+    await waitFor(() => fireEvent.change(input, { target: { value: 'pavel poltavets!' }}));
+    await waitFor(() => fireEvent.blur(input));
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should show error when focus is lost and if an incorrect email was set', async () => {
+    const { asFragment } = render(<SignUpFormComponent />);
+    await fillForm();
+    const input = getStyledComponent(Input, 'email');
+    input.focus();
+    await waitFor(() => fireEvent.change(input, { target: { value: 'pavel.a.poltavets' }}));
+    await waitFor(() => fireEvent.blur(input));
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
 
 describe('SignUpForm server errors validation', () => {

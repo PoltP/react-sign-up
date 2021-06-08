@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Block } from './block.styled';
 import { Input } from './input.styled';
@@ -15,6 +15,7 @@ interface IInputComponentProps {
   error?: IError;
   isLoading?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onValidate: (field: KnownField) => void;
 }
 
 export const InputComponent = ({
@@ -25,21 +26,31 @@ export const InputComponent = ({
   error,
   isLoading,
   onChange,
-}: IInputComponentProps) => (
-  <Block>
-    <Label isError={!!error}>
-      {label}
-      <Input
-        required
-        type={type}
-        name={name}
-        placeholder={label}
-        value={value}
-        isError={!!error}
-        onChange={onChange}
-      />
-      {isLoading && <LineSpinner />}
-      <ErrorText visible={!!error}>{error?.message}</ErrorText>
-    </Label>
-  </Block>
-);
+  onValidate
+}: IInputComponentProps) => {
+  const [focused, setFocused] = useState(false);
+  const onBlur = () => {
+    setFocused(false);
+    onValidate && onValidate(name);
+  }
+  return (
+    <Block>
+      <Label isError={!!error}>
+        {label}
+        <Input
+          required
+          type={type}
+          name={name}
+          placeholder={label}
+          value={value}
+          isError={!focused && !!error}
+          onChange={onChange}
+          onFocus={() => setFocused(true)}
+          onBlur={onBlur}
+        />
+        {isLoading && <LineSpinner />}
+        <ErrorText visible={!!error}>{error?.message}</ErrorText>
+      </Label>
+    </Block>
+  );
+}
