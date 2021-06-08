@@ -64,7 +64,7 @@ describe('SignUpForm client errors validation', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should show error if incorrect username was set', async () => {
+  it('should show error if an incorrect username was set', async () => {
     const { asFragment } = render(<SignUpFormComponent />);
     await fillForm();
     await waitFor(() => setInputValue('username', 'pavel><poltavets'));
@@ -72,7 +72,7 @@ describe('SignUpForm client errors validation', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should show error if incorrect email was set', async () => {
+  it('should show error if an incorrect email was set', async () => {
     const { asFragment } = render(<SignUpFormComponent />);
     await fillForm();
     act(() => setInputValue('email', 'pavel.a.poltavets'));
@@ -80,7 +80,7 @@ describe('SignUpForm client errors validation', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should show error if incorrect password confirmation was set', async () => {
+  it('should show error if an incorrect password confirmation was set', async () => {
     const { asFragment } = render(<SignUpFormComponent />);
     await fillForm();
     act(() => setInputValue('passwordConfirm', '11111111'));
@@ -88,7 +88,7 @@ describe('SignUpForm client errors validation', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('should show error if incorrect password length was set', async () => {
+  it('should show error if an incorrect password length was set', async () => {
     const { asFragment } = render(<SignUpFormComponent />);
     await fillForm();
     act(() => {

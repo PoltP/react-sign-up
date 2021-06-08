@@ -108,7 +108,7 @@ exports[`SignUpForm client errors validation should show all client validation e
 </DocumentFragment>
 `;
 
-exports[`SignUpForm client errors validation should show error if incorrect email was set 1`] = `
+exports[`SignUpForm client errors validation should show error if an incorrect email was set 1`] = `
 <DocumentFragment>
   <div
     class="sc-bdnxRM bUacdj"
@@ -212,7 +212,7 @@ exports[`SignUpForm client errors validation should show error if incorrect emai
 </DocumentFragment>
 `;
 
-exports[`SignUpForm client errors validation should show error if incorrect password confirmation was set 1`] = `
+exports[`SignUpForm client errors validation should show error if an incorrect password confirmation was set 1`] = `
 <DocumentFragment>
   <div
     class="sc-bdnxRM bUacdj"
@@ -316,7 +316,7 @@ exports[`SignUpForm client errors validation should show error if incorrect pass
 </DocumentFragment>
 `;
 
-exports[`SignUpForm client errors validation should show error if incorrect password length was set 1`] = `
+exports[`SignUpForm client errors validation should show error if an incorrect password length was set 1`] = `
 <DocumentFragment>
   <div
     class="sc-bdnxRM bUacdj"
@@ -420,7 +420,7 @@ exports[`SignUpForm client errors validation should show error if incorrect pass
 </DocumentFragment>
 `;
 
-exports[`SignUpForm client errors validation should show error if incorrect username was set 1`] = `
+exports[`SignUpForm client errors validation should show error if an incorrect username was set 1`] = `
 <DocumentFragment>
   <div
     class="sc-bdnxRM bUacdj"
