@@ -98,3 +98,10 @@ Some references concerning it:\
 **[/mock-server](https://github.com/PoltP/react-sign-up/tree/master/mock-server)** - primitive server implementation
 
 **[/src/components](https://github.com/PoltP/react-sign-up/tree/master/src/components)** - components including [Sign Up Form](https://github.com/PoltP/react-sign-up/tree/master/src/components/form), [theming](https://github.com/PoltP/react-sign-up/tree/master/src/components/theming), [localization](https://github.com/PoltP/react-sign-up/tree/master/src/components/localization) and tests for them
+
+
+## Future
+
+1) Using much more complex patterns to check fields.
+2) Using password estimators like [zxcvbn](https://www.npmjs.com/package/zxcvbn).
+3) Redesign validation errors.
