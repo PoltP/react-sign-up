@@ -6,6 +6,7 @@ export interface ITheme {
     error: string;
     text: string;
     subText: string;
+    spinner: string;
   };
   fontFamily: string;
   fontSize: {

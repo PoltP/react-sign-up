@@ -4,7 +4,7 @@ import { Container } from './container.styled';
 import { Button } from './button.styled';
 import { SignUpForm } from './signup-form.styled';
 import { ErrorText } from '../elements/error.styled';
-import { Spinner } from '../elements/spinner.styled';
+import { CircleSpinner } from '../elements/circle-spinner.styled';
 import { InputComponent } from '../input/InputComponent';
 import { i18nCreator } from '../localization/i18n';
 import { signUpValidator } from '../validation/sign-up-validator';
@@ -21,6 +21,7 @@ const POST_HEADER = {
 export const SignUpFormComponent = () => {
   const [isSent, setIsSent] = useState(false);
   const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isCheckingUsername, setIsCheckingUsername] = useState(false);
 
   //const [user, setUser] = useState<User>({username: '', email: '', password: '', passwordConfirm: ''});
   const [username, setUsername] = useState('');
@@ -108,6 +109,7 @@ export const SignUpFormComponent = () => {
 
   useEffect(() => {
     const checkUsername = async () => {
+      setIsCheckingUsername(true);
       const result = await fetch(`${config.serverAPI}/check`, {
         method: 'POST',
         body: JSON.stringify({ /*username: user.*/ username }),
@@ -133,7 +135,8 @@ export const SignUpFormComponent = () => {
             ...prevErrors,
             unknown: { message: e.message },
           }));
-        });
+        })
+        .finally(() => setIsCheckingUsername(false));
     };
 
     /*user.*/ username && checkUsername();
@@ -162,6 +165,7 @@ export const SignUpFormComponent = () => {
               name="username"
               value={/*user.*/ username}
               error={clientErrors['username'] || serverErrors['username']}
+              isLoading={isCheckingUsername}
               onChange={handleChange}
             />
             <InputComponent
@@ -182,7 +186,7 @@ export const SignUpFormComponent = () => {
             />
             <Button disabled={isSigningUp} onClick={isSigningUp ? undefined : handleSubmit}>
               {i18nSignUp(isSigningUp ? 'signingup' : 'submit')}
-              {isSigningUp && <Spinner />}
+              {isSigningUp && <CircleSpinner />}
               <ErrorText visible={!!otherErrors.length}>{otherErrors.join('\n')}</ErrorText>
             </Button>
           </>

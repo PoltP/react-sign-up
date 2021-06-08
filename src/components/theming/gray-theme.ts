@@ -8,6 +8,7 @@ export const GRAY_THEME: ITheme = {
     error: '#FE0200',
     text: '#3A3A3A',
     subText: '#3C3C3C',
+    spinner: 'rgba(58, 58, 58, .3)',
   },
   fontFamily: 'Roboto',
   fontSize: {

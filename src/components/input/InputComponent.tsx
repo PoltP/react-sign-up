@@ -5,6 +5,7 @@ import { Input } from './input.styled';
 import { Label } from './label.styled';
 import { ErrorText } from '../elements/error.styled';
 import { IError } from '../types/form-fields';
+import { LineSpinner } from '../elements/line-spinner.styled';
 
 interface IInputComponentProps {
   name: string;
@@ -12,6 +13,7 @@ interface IInputComponentProps {
   type: string;
   value: string;
   error?: IError;
+  isLoading?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,6 +23,7 @@ export const InputComponent = ({
   type,
   value,
   error,
+  isLoading,
   onChange,
 }: IInputComponentProps) => (
   <Block>
@@ -35,6 +38,7 @@ export const InputComponent = ({
         isError={!!error}
         onChange={onChange}
       />
+      {isLoading && <LineSpinner />}
       <ErrorText visible={!!error}>{error?.message}</ErrorText>
     </Label>
   </Block>

@@ -33,6 +33,18 @@ const checkErrors = (body) => {
     }, undefined);
 }
 
+const checkUsername = (req, res) => {
+    const {username = ''} = req.body;
+    const error = checkIsAlreadyTakenError(username);
+    if (!error) {
+        res.status(200).json(OK_RESPONSE);
+    } else {
+        res.status(400).json({
+            errors: error
+        });
+    }
+}
+
 const signUp = (req, res) => {
     const errors = checkErrors(req.body);
     if (!errors) {
@@ -46,16 +58,11 @@ const signUp = (req, res) => {
     }
 }
 
-apiRouter.post('/check', (req, res) => {
-    const {username = ''} = req.body;
-    const error = checkIsAlreadyTakenError(username);
-    if (!error) {
-        res.status(200).json(OK_RESPONSE);
-    } else {
-        res.status(400).json({
-            errors: error
-        });
-    }
+apiRouter.post('/check', checkUsername);
+
+apiRouter.post('/check-delay/:interval', (req, res) => {
+    const {interval = DEFAULT_DELAY} = req.params;
+    setTimeout(() => checkUsername(req, res), interval);
 });
 
 apiRouter.post('/signup', signUp);
