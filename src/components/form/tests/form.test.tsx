@@ -53,6 +53,13 @@ describe('SignUpForm rendering', () => {
       await screen.findByRole((_, e: any) => e.name === 'username' && e.value === 'Albert Einstein')
     ).toBeInTheDocument();
   });
+
+  it('should sign up and display final message', async () => {
+    const { asFragment } = render(<SignUpFormComponent />);
+    await fillForm();
+    await waitFor(() => fireEvent.click(getStyledComponent(SignUpButton)));
+    expect(asFragment()).toMatchSnapshot();
+  });
 });
 
 describe('SignUpForm client errors validation', () => {

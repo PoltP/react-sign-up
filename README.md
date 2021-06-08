@@ -1,3 +1,5 @@
+# React Sign Up
+Handling user registration and form validation
 
 # Getting Started with react-sign-up
 
@@ -89,13 +91,13 @@ Some references concerning it:\
 
 ### Branches
 1) [master](https://github.com/PoltP/react-sign-up/tree/master) - implementation with validation on SignUp click;
-2) [Validation-on-lost-focus](https://github.com/PoltP/react-sign-up/tree/Validation-on-lost-focus) - implementation with validation when input focus is lost, I personally prefer it.
+2) [validation-on-lost-focus](https://github.com/PoltP/react-sign-up/tree/validation-on-lost-focus) - implementation with validation when input focus is lost, I personally prefer it.
 
 ### Modules
 
-**[.env](https://github.com/PoltP/react-sign-up/blob/master/.env)** - contains environment variables (server host and post etc.)
-
 **[/mock-server](https://github.com/PoltP/react-sign-up/tree/master/mock-server)** - primitive server implementation
+
+**[/src/config.js](https://github.com/PoltP/react-sign-up/blob/master/src/config.js)** - contains project configuration variables (server host, server port etc., see [.env](https://github.com/PoltP/react-sign-up/blob/master/.env) also)
 
 **[/src/components](https://github.com/PoltP/react-sign-up/tree/master/src/components)** - components including [Sign Up Form](https://github.com/PoltP/react-sign-up/tree/master/src/components/form) and tests for them
 

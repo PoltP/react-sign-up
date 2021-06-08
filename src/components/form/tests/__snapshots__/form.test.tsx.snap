@@ -728,6 +728,21 @@ exports[`SignUpForm rendering should render filled form 1`] = `
 </DocumentFragment>
 `;
 
+exports[`SignUpForm rendering should sign up and display final message 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM bUacdj"
+  >
+    Sign up to Coins.ph!
+    <form
+      class="sc-hKFxyN dbVKjX"
+    >
+      Signed up successfully!
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`SignUpForm server errors validation should forbid signing up when there is an error after checking user name 1`] = `
 <DocumentFragment>
   <div
